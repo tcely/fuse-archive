@@ -68,9 +68,9 @@
 
 #define PROGRAM_NAME "fuse-archive"
 
-// Odd minor versions (e.g. 1.1.x or 1.3.x) are development versions.
-// Even minor versions (e.g. 1.2.x or 1.4.x) are stable versions.
-#define PROGRAM_VERSION "0.1.15"
+// Even minor versions (e.g. 1.0 or 1.2) are stable versions.
+// Odd minor versions (e.g. 1.1 or 1.3) are development versions.
+#define PROGRAM_VERSION "1.3"
 
 namespace {
 
@@ -774,7 +774,9 @@ SideBufferMetadata g_side_buffer_metadata[NUM_SIDE_BUFFERS] = {};
 
 template <typename... Args>
 std::string StrCat(Args&&... args) {
-  return (std::ostringstream() << ... << std::forward<Args>(args)).str();
+  std::ostringstream out;
+  (out << ... << std::forward<Args>(args));
+  return std::move(out).str();
 }
 
 enum class LogLevel {
