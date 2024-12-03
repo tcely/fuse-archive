@@ -17,7 +17,7 @@ WORKDIR "${BUILDDIR}"
 
 RUN make
 
-RUN mkdir -v -p "${DESTDIR}" && make install
+RUN mkdir -v -p "${DESTDIR}" && make install-strip
 
 VOLUME "${DESTDIR}"
 
